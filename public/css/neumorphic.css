@@ -1,0 +1,254 @@
+/* ==========================================================
+   Neumorphic (soft UI) stylesheet – Client Management System
+   Surface colour is the same everywhere; depth comes only from
+   a light shadow (top-left) and a dark shadow (bottom-right).
+   ========================================================== */
+:root{
+  --bg:#e0e5ec; --light:#ffffff; --dark:#a3b1c6;
+  --text:#3d4468; --muted:#566083;
+  --accent:#0b5563; --accent2:#138496;
+  --ok:#14683a; --bad:#b3363b;
+  --radius:20px;
+}
+*{box-sizing:border-box}
+button,input,textarea{font:inherit;color:inherit}
+table{border-collapse:collapse}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+[hidden]{display:none!important}
+h2,h3,p{margin:0}
+img,svg{max-width:100%}
+
+/* ---------- Core components ---------- */
+.neu-card{background:var(--bg);border-radius:var(--radius);
+  box-shadow:9px 9px 18px var(--dark),-9px -9px 18px var(--light)}
+.neu-inset{background:var(--bg);border-radius:14px;
+  box-shadow:inset 5px 5px 9px var(--dark),inset -5px -5px 9px var(--light)}
+
+.neu-btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;
+  background:var(--bg);color:var(--accent);font-weight:700;font-size:15px;
+  border-radius:14px;padding:13px 24px;line-height:1.2;
+  box-shadow:6px 6px 12px var(--dark),-6px -6px 12px var(--light);
+  transition:box-shadow .15s,color .15s}
+.neu-btn:hover{color:var(--accent2)}
+.neu-btn:active,.neu-btn.active{
+  box-shadow:inset 4px 4px 8px var(--dark),inset -4px -4px 8px var(--light)}
+.neu-btn.danger{color:var(--bad)}
+.neu-btn-muted{color:var(--muted)}
+
+.neu-input{display:block;width:100%;border:0;outline:0;background:var(--bg);
+  color:var(--text);font-size:15px;font-family:inherit;padding:14px 18px;border-radius:14px;
+  box-shadow:inset 5px 5px 9px var(--dark),inset -5px -5px 9px var(--light)}
+.neu-input::placeholder{color:var(--muted);opacity:.85}
+.neu-input:focus{outline:2px solid var(--accent2);outline-offset:2px}
+.neu-input.has-error{outline:2px solid var(--bad);outline-offset:2px}
+textarea.neu-input{resize:vertical;min-height:96px}
+
+.neu-badge{display:inline-block;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;
+  box-shadow:inset 3px 3px 6px var(--dark),inset -3px -3px 6px var(--light)}
+.neu-badge.ok{color:var(--ok)} .neu-badge.bad{color:var(--bad)}
+
+.neu-icon{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;
+  border:0;border-radius:50%;background:var(--bg);color:var(--accent);cursor:pointer;padding:0;
+  box-shadow:4px 4px 8px var(--dark),-4px -4px 8px var(--light)}
+.neu-icon:hover{color:var(--accent2)}
+.neu-icon:active{box-shadow:inset 3px 3px 6px var(--dark),inset -3px -3px 6px var(--light)}
+.neu-icon.danger{color:var(--bad)}
+
+/* ---------- Page layout ---------- */
+.app{display:flex;gap:24px;padding:22px;min-height:100vh}
+.side{width:210px;flex:none;padding:22px 14px;display:flex;flex-direction:column;
+  position:sticky;top:22px;align-self:flex-start;height:calc(100vh - 44px)}
+.main{flex:1;min-width:0;padding:28px 32px}
+
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:30px;padding:0 4px;color:var(--accent)}
+.brand b{font-size:14px;line-height:1.25}
+.brand-icon{width:46px;height:46px;flex:none}
+.nav-item{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:14px;
+  margin-bottom:16px;font-size:15px;font-weight:600;color:var(--muted)}
+.nav-item:hover{color:var(--accent)}
+.nav-item.on{color:var(--accent);
+  box-shadow:inset 5px 5px 9px var(--dark),inset -5px -5px 9px var(--light)}
+.side-foot{margin-top:auto;font-size:12px;color:var(--muted);line-height:1.6;padding:0 6px}
+
+.hd{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.hd .l{display:flex;align-items:center;gap:16px}
+.hd-icon{width:50px;height:50px;cursor:default}
+.hd h2{font-size:24px}
+.hd p{font-size:14px;color:var(--muted);margin-top:2px}
+
+.flash{margin:0 0 18px;padding:12px 18px;font-size:14px;font-weight:600;color:var(--ok);
+  display:flex;gap:10px;align-items:center}
+
+/* ---------- Search + table ---------- */
+.search-row{display:flex;gap:16px;margin-top:20px;align-items:center;flex-wrap:wrap}
+.search-wrap{flex:1;position:relative;min-width:220px}
+.search-wrap svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search-wrap .neu-input{padding-left:46px}
+
+.table-wrap{overflow-x:auto;margin-top:18px}
+.clients-table{width:100%;border-collapse:collapse}
+.clients-table th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);
+  text-align:left;padding:8px;white-space:nowrap}
+.clients-table td{padding:0 8px;height:46px;font-size:13px;white-space:nowrap;
+  border-top:1px solid rgba(163,177,198,.35)}
+.clients-table .empty{text-align:center;height:90px;color:var(--muted);font-size:14px}
+.av{display:inline-flex;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:var(--accent);margin-right:10px;vertical-align:middle;
+  box-shadow:3px 3px 6px var(--dark),-3px -3px 6px var(--light)}
+.nm{font-weight:700;vertical-align:middle}
+.ab{display:flex;gap:8px}
+.ab .neu-icon{width:30px;height:30px}
+
+.pg{display:flex;justify-content:space-between;align-items:center;margin-top:14px;
+  font-size:13px;color:var(--muted);flex-wrap:wrap;gap:10px}
+.pg-nav{display:flex;gap:8px}
+.pb{display:inline-flex;width:32px;height:32px;border-radius:10px;align-items:center;justify-content:center;
+  color:var(--text);box-shadow:3px 3px 6px var(--dark),-3px -3px 6px var(--light)}
+.pb.on{color:var(--accent);font-weight:700;
+  box-shadow:inset 3px 3px 6px var(--dark),inset -3px -3px 6px var(--light)}
+.pb.disabled{color:var(--muted);opacity:.6;box-shadow:none}
+
+/* ---------- Forms ---------- */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 28px;margin-top:24px}
+.form-grid .full{grid-column:1/3}
+.form-grid label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:8px}
+.form-grid label i{color:var(--bad);font-style:normal}
+.err{display:block;margin-top:6px;color:var(--bad);font-size:13px;font-weight:600}
+
+.seg{display:flex;gap:16px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg .neu-btn{flex:1;justify-content:center;color:var(--muted)}
+.seg input:checked + .seg-ok{color:var(--ok);
+  box-shadow:inset 4px 4px 8px var(--dark),inset -4px -4px 8px var(--light)}
+.seg input:checked + .seg-bad{color:var(--bad);
+  box-shadow:inset 4px 4px 8px var(--dark),inset -4px -4px 8px var(--light)}
+.seg input:focus-visible + .neu-btn{outline:2px solid var(--accent2);outline-offset:2px}
+
+.acts{display:flex;gap:18px;margin-top:28px;flex-wrap:wrap}
+.acts-center{justify-content:center}
+
+/* ---------- Details page ---------- */
+.det{display:flex;align-items:center;gap:24px;margin-top:24px}
+.bigav{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:34px;font-weight:700;color:var(--accent);flex:none;
+  box-shadow:8px 8px 16px var(--dark),-8px -8px 16px var(--light)}
+.det h3{font-size:26px}
+.det p{color:var(--muted);margin:4px 0 10px;font-size:15px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;margin-top:26px}
+.info-grid .full{grid-column:1/3}
+.tile{padding:14px 18px}
+.tile small{display:block;font-size:12px;font-weight:700;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.tile span{font-size:16px;font-weight:600;word-break:break-word}
+
+/* ---------- Delete dialog (native <dialog>) ---------- */
+.neu-dialog{border:0;padding:0;background:transparent;color:inherit;width:min(440px,92vw);max-width:none}
+.neu-dialog::backdrop{background:rgba(224,229,236,.82);backdrop-filter:blur(3px)}
+.modal-box{padding:32px 34px;text-align:center;background:var(--bg);border-radius:var(--radius);
+  box-shadow:9px 9px 18px var(--dark),-9px -9px 18px var(--light)}
+.warn-icon{width:64px;height:64px;color:var(--bad);margin:0 auto 16px;cursor:default}
+.modal-box h3{font-size:22px;margin-bottom:10px}
+.modal-box p{font-size:15px;color:var(--muted);line-height:1.55}
+
+/* ---------- Accessibility helpers ---------- */
+.visually-hidden{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:-9999px;top:8px;z-index:100;padding:10px 16px;border-radius:10px;
+  background:var(--bg);color:var(--accent);font-weight:700;box-shadow:4px 4px 8px var(--dark),-4px -4px 8px var(--light)}
+.skip-link:focus{left:12px}
+a:focus-visible,button:focus-visible,.neu-btn:focus-visible,.neu-icon:focus-visible,.pb:focus-visible,.nav-item:focus-visible{
+  outline:2px solid var(--accent2);outline-offset:3px}
+.main:focus{outline:none}
+.flash-bad{color:var(--bad)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .app{flex-direction:column;padding:14px}
+  .side{width:auto;position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px}
+  .brand{margin:0 10px 0 0}
+  .side nav{display:flex;gap:10px;flex-wrap:wrap}
+  .nav-item{margin:0}
+  .side-foot{display:none}
+  .main{padding:20px 16px}
+  .form-grid,.info-grid{grid-template-columns:1fr}
+  .form-grid .full,.info-grid .full{grid-column:1}
+}
+
+/* ==========================================================
+   Motion and flexible (responsive) table
+   All animations are switched off by the prefers-reduced-motion rule above.
+   ========================================================== */
+@keyframes fadeUp   { from { opacity:0; transform:translateY(14px) } to { opacity:1; transform:none } }
+@keyframes slideIn  { from { opacity:0; transform:translateX(-18px) } to { opacity:1; transform:none } }
+@keyframes slideDown{ from { opacity:0; transform:translateY(-10px) } to { opacity:1; transform:none } }
+@keyframes popIn    { from { opacity:0; transform:scale(.92) } to { opacity:1; transform:none } }
+@keyframes fadeIn   { from { opacity:0 } to { opacity:1 } }
+@keyframes shake    { 0%,100% { transform:none } 20% { transform:translateX(-6px) } 40% { transform:translateX(6px) }
+                      60% { transform:translateX(-4px) } 80% { transform:translateX(4px) } }
+@keyframes spin     { to { transform:rotate(360deg) } }
+
+.side  { animation: slideIn .45s ease both }
+.main  { animation: fadeUp .45s ease both }
+.flash { animation: slideDown .35s ease both; transition: opacity .4s, transform .4s }
+.flash.hide { opacity:0; transform:translateY(-8px); pointer-events:none }
+
+.clients-table tbody tr { animation: fadeUp .4s ease both }
+.clients-table tbody tr:nth-child(1){animation-delay:.02s} .clients-table tbody tr:nth-child(2){animation-delay:.06s}
+.clients-table tbody tr:nth-child(3){animation-delay:.10s} .clients-table tbody tr:nth-child(4){animation-delay:.14s}
+.clients-table tbody tr:nth-child(5){animation-delay:.18s} .clients-table tbody tr:nth-child(6){animation-delay:.22s}
+.clients-table tbody tr:nth-child(7){animation-delay:.26s} .clients-table tbody tr:nth-child(8){animation-delay:.30s}
+.clients-table tbody tr:nth-child(9){animation-delay:.34s} .clients-table tbody tr:nth-child(10){animation-delay:.38s}
+
+.form-grid > div { animation: fadeUp .45s ease both }
+.form-grid > div:nth-child(2){animation-delay:.05s} .form-grid > div:nth-child(3){animation-delay:.10s}
+.form-grid > div:nth-child(4){animation-delay:.15s} .form-grid > div:nth-child(5){animation-delay:.20s}
+.form-grid > div:nth-child(6){animation-delay:.25s} .form-grid > div:nth-child(7){animation-delay:.30s}
+.det, .info-grid .tile, .acts { animation: fadeUp .5s ease both }
+.info-grid .tile:nth-child(2){animation-delay:.05s} .info-grid .tile:nth-child(3){animation-delay:.10s}
+.info-grid .tile:nth-child(4){animation-delay:.15s} .info-grid .tile:nth-child(5){animation-delay:.20s}
+.info-grid .tile:nth-child(6){animation-delay:.25s} .info-grid .tile:nth-child(7){animation-delay:.30s}
+
+.neu-btn, .neu-icon, .pb, .nav-item { transition: transform .15s ease, box-shadow .2s ease, color .2s ease }
+.neu-btn:hover, .neu-icon:hover, .pb:hover { transform: translateY(-2px) }
+.neu-btn:active, .neu-icon:active, .pb:active { transform: translateY(0) scale(.97) }
+.neu-input { transition: box-shadow .2s ease, outline-color .2s ease }
+.neu-input.has-error { animation: shake .4s ease }
+
+.neu-dialog[open]           { animation: popIn .22s ease }
+.neu-dialog[open]::backdrop { animation: fadeIn .22s ease }
+
+#results { transition: opacity .2s ease }
+#results.loading { opacity:.45 }
+
+.neu-btn.is-loading { opacity:.7; pointer-events:none }
+.neu-btn.is-loading::after { content:""; width:14px; height:14px; border-radius:50%;
+  border:2px solid currentColor; border-right-color:transparent; animation: spin .7s linear infinite }
+
+/* flexible table: becomes a list of cards on phones */
+@media (max-width:760px){
+  .clients-table thead { display:none }
+  .clients-table, .clients-table tbody, .clients-table tr, .clients-table td { display:block; width:100% }
+  .clients-table tbody tr { margin:16px 4px; padding:10px 14px; border-radius:16px;
+    box-shadow:6px 6px 12px var(--dark), -6px -6px 12px var(--light) }
+  .clients-table td { display:flex; justify-content:space-between; align-items:center; gap:12px;
+    height:auto; min-height:38px; padding:6px 0; border:0; white-space:normal; text-align:right }
+  .clients-table td::before { content:attr(data-label); font-size:11px; font-weight:700;
+    text-transform:uppercase; letter-spacing:.05em; color:var(--muted); text-align:left }
+  .clients-table td:first-child { display:none }
+  .clients-table tbody td.empty { display:block; text-align:center }
+  .clients-table tbody td.empty::before { content:none }
+  .hd .neu-btn { width:100%; justify-content:center }
+  .acts .neu-btn { flex:1; justify-content:center }
+}
+
+/* medium screens (tablets, small laptops): let long text wrap so the Actions column stays visible */
+@media (max-width:1250px) and (min-width:761px){
+  .clients-table th, .clients-table td { padding-left:6px; padding-right:6px }
+  .clients-table td { white-space:normal; overflow-wrap:anywhere; font-size:12.5px }
+  .clients-table td[data-label="Name"], .clients-table td[data-label="Status"],
+  .clients-table td[data-label="Actions"] { white-space:nowrap }
+  .av { display:none }
+}
